@@ -159,3 +159,7 @@ NEW FARMING MACHINE
 - init db on mysql farmingmachine
 - set .env
 - after prisma model in place generate prisma migrations files : npx prisma migrate dev --name init
+- To install Prisma Client in your project : npm install @prisma/client (run prisma generate on first time)
+- Update your generated Prisma Client after every change to Prisma models : prisma generate
+- The prisma generate command reads your Prisma schema and updates the generated Prisma Client library inside node_modules/@prisma/client. 
+- for debugging nest js application please ref to https://javascript.plainenglish.io/debugging-nestjs-in-vscode-d474a088c63b
