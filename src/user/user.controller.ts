@@ -6,6 +6,8 @@ import {
   Body,
   Put,
   Delete,
+  Patch,
+  Query,
 } from '@nestjs/common';
 // import { UserService } from './user.service';
 // import { User as UserModel } from '@prisma/client';
@@ -13,8 +15,9 @@ import {
 @Controller('users')
 export class UserController {
   @Get()
-  findAll() {
-    return 'This action returns all users';
+  findAll(@Query() paginationQuery) {
+    const { limit, offset } = paginationQuery;
+    return `This action returns all coffees. Limit ${limit}, offset: ${offset}`;
   }
 
   @Get('user/:id')
@@ -25,6 +28,16 @@ export class UserController {
   @Post('user')
   create(@Body() body) {
     return body;
+  }
+
+  @Patch('user/:id')
+  update(@Param('id') id: string, @Body() body) {
+    return `This action updates #${id} coffee`;
+  }
+
+  @Delete('user/:id')
+  remove(@Param('id') id: string) {
+    return `This action removes #${id} coffee`;
   }
 }
 
