@@ -164,4 +164,5 @@ NEW FARMING MACHINE
 - The prisma generate command reads your Prisma schema and updates the generated Prisma Client library inside node_modules/@prisma/client. 
 - for debugging nest js application please ref to https://javascript.plainenglish.io/debugging-nestjs-in-vscode-d474a088c63b
 - Abstract away the Prisma Client API for database queries within a service. To get started, you can create a new PrismaService that takes care of instantiating PrismaClient and connecting to your database : nest g service
+- generate a new controller : nest g controller
 
