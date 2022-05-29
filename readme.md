@@ -166,4 +166,5 @@ NEW FARMING MACHINE
 - Abstract away the Prisma Client API for database queries within a service. To get started, you can create a new PrismaService that takes care of instantiating PrismaClient and connecting to your database : nest g service
 - generate a new controller : nest g controller
 - encompass business domain on modules: nest g module {name}
+- defines the interface for input or/and output within our system : nest g class user/dto/create-user.dto --no-spec
 

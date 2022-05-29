@@ -11,6 +11,7 @@ import {
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User as UserModel } from '@prisma/client';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Controller('users')
 export class UserController {
@@ -60,9 +61,7 @@ export class UserController {
   }
 
   @Post('user')
-  async signupUser(
-    @Body() userData: { name?: string; email: string },
-  ): Promise<UserModel> {
+  async signupUser(@Body() userData: CreateUserDto): Promise<UserModel> {
     return this.userService.createUser(userData);
   }
 
