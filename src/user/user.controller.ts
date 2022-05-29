@@ -47,7 +47,7 @@ export class UserController {
     });
   }
 
-  // Need to fix security
+  // Need to fix security path
 
   @Get('user-id/:id')
   async getUserById(@Param('id') id: number): Promise<UserModel> {

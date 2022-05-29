@@ -22,7 +22,7 @@ export class UserService {
     });
     const { id, email } = userWhereUniqueInput;
     const userParams = `${
-      id ? `User with ${id} not found` : `User with ${email} not found`
+      id ? `User with id:${id} not found` : `User with email:${email} not found`
     }`;
     if (!user) {
       throw new NotFoundException(userParams);
