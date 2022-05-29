@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { User, Prisma } from '@prisma/client';
 
@@ -6,12 +6,28 @@ import { User, Prisma } from '@prisma/client';
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
+  //   async user(
+  //     userWhereUniqueInput: Prisma.UserWhereUniqueInput,
+  //   ): Promise<User | null> {
+  //     return this.prisma.user.findUnique({
+  //       where: userWhereUniqueInput,
+  //     });
+  //   }
+
   async user(
     userWhereUniqueInput: Prisma.UserWhereUniqueInput,
   ): Promise<User | null> {
-    return this.prisma.user.findUnique({
+    const user = await this.prisma.user.findUnique({
       where: userWhereUniqueInput,
     });
+    const { id, email } = userWhereUniqueInput;
+    const userParams = `${
+      id ? `User with ${id} not found` : `User with ${email} not found`
+    }`;
+    if (!user) {
+      throw new NotFoundException(userParams);
+    }
+    return user;
   }
 
   async users(params: {
@@ -53,25 +69,4 @@ export class UserService {
       where,
     });
   }
-  //       findAll() {
-  //     return this.coffees;
-  //   }
-
-  //   create(createCoffeeDto: any) {
-  //     this.coffees.push(createCoffeeDto);
-  //   }
-
-  //   update(id: string, updateCoffeeDto: any) {
-  //     const existingCoffee = this.findOne(id);
-  //     if (existingCoffee) {
-  //       // update the existing entity
-  //     }
-  //   }
-
-  //   remove(id: string) {
-  //     const coffeeIndex = this.coffees.findIndex(item => item.id === +id);
-  //     if (coffeeIndex >= 0) {
-  //       this.coffees.splice(coffeeIndex, 1);
-  //     }
-  //   }
 }
