@@ -21,16 +21,18 @@ export class UserController {
     return this.userService.users(params);
   }
 
-  // need to find some examples
-  @Get('filter')
+  // Need to find some examples with OR/ AND
+  @Get('filtered-user')
   async getFilterUsers(@Query() params): Promise<UserModel[]> {
     const { skip, take, cursor, where, orderBy } = params;
     return this.userService.users({
-      skip: Number(skip),
-      take: Number(take),
-      cursor: { id: Number(cursor) },
-      where: { id: Number(where) },
-      orderBy: orderBy,
+      //   skip: Number(skip),
+      //   take: Number(take),
+      //   cursor: { id: Number(cursor) },
+      //   where: { id: Number(where) },
+      orderBy: {
+        id: orderBy,
+      },
     });
   }
 
@@ -45,12 +47,14 @@ export class UserController {
     });
   }
 
-  @Get('user/id/:id')
+  // Need to fix security
+
+  @Get('user-id/:id')
   async getUserById(@Param('id') id: number): Promise<UserModel> {
     return this.userService.user({ id: Number(id) });
   }
 
-  @Get('user/email/:email')
+  @Get('user-email/:email')
   async getUserByEmail(@Param('email') email: string): Promise<UserModel> {
     return this.userService.user({ email: String(email) });
   }
@@ -62,23 +66,19 @@ export class UserController {
     return this.userService.createUser(userData);
   }
 
-  //   @Patch('user/:id')
-  //   update(@Param('id') id: string, @Body() body) {
-  //     return `This action updates #${id} coffee`;
-  //   }
+  @Put('user/:id')
+  async currentUser(
+    @Param('id') id: string,
+    @Body() userData: { name?: string; email?: string },
+  ): Promise<UserModel> {
+    return this.userService.updateUser({
+      where: { id: Number(id) },
+      data: userData,
+    });
+  }
 
-  //   @Patch('user/:id')
-  //   update(@Param('id') id: string, @Body() body) {
-  //     return this.coffeesService.update(id, body);
-  //   }
-
-  //   @Delete('user/:id')
-  //   remove(@Param('id') id: string) {
-  //     return `This action removes #${id} coffee`;
-  //   }
-
-  //   @Delete('user:id')
-  //   remove(@Param('id') id: string) {
-  //     return this.coffeesService.remove(id);
-  //   }
+  @Delete('user-id/:id')
+  async deleteUserById(@Param('id') id: number): Promise<UserModel> {
+    return this.userService.deleteUser({ id: Number(id) });
+  }
 }
