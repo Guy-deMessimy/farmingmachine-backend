@@ -167,4 +167,6 @@ NEW FARMING MACHINE
 - generate a new controller : nest g controller
 - encompass business domain on modules: nest g module {name}
 - defines the interface for input or/and output within our system : nest g class user/dto/create-user.dto --no-spec
+- In order to check correct shape and/or missing require fields of request, use validationPipe : npm i class-validator class-transformer
+
 
