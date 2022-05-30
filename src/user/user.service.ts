@@ -1,18 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { User, Prisma } from '@prisma/client';
+import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 
 @Injectable()
 export class UserService {
   constructor(private prisma: PrismaService) {}
-
-  //   async user(
-  //     userWhereUniqueInput: Prisma.UserWhereUniqueInput,
-  //   ): Promise<User | null> {
-  //     return this.prisma.user.findUnique({
-  //       where: userWhereUniqueInput,
-  //     });
-  //   }
 
   async user(
     userWhereUniqueInput: Prisma.UserWhereUniqueInput,
@@ -30,20 +23,20 @@ export class UserService {
     return user;
   }
 
-  async users(params: {
-    skip?: number;
-    take?: number;
+  async users(paginationQuery: {
+    limit?: number;
+    offset?: number;
     cursor?: Prisma.UserWhereUniqueInput;
     where?: Prisma.UserWhereInput;
     orderBy?: Prisma.UserOrderByWithRelationInput;
   }): Promise<User[]> {
-    const { skip, take, cursor, where, orderBy } = params;
+    const { limit, offset, cursor, where, orderBy } = paginationQuery;
     return this.prisma.user.findMany({
-      skip,
-      take,
+      skip: offset,
+      take: limit,
+      orderBy,
       cursor,
       where,
-      orderBy,
     });
   }
 

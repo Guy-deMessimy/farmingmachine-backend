@@ -13,6 +13,7 @@ import { UserService } from './user.service';
 import { User as UserModel } from '@prisma/client';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 
 @Controller('users')
 export class UserController {
@@ -23,15 +24,14 @@ export class UserController {
     return this.userService.users(params);
   }
 
-  // Need to find some examples with OR/ AND
   @Get('filtered-user')
-  async getFilterUsers(@Query() params): Promise<UserModel[]> {
-    const { skip, take, cursor, where, orderBy } = params;
+  async getFilterUsers(
+    @Query() paginationQuery: PaginationQueryDto,
+  ): Promise<UserModel[]> {
+    const { limit, offset, orderBy } = paginationQuery;
     return this.userService.users({
-      //   skip: Number(skip),
-      //   take: Number(take),
-      //   cursor: { id: Number(cursor) },
-      //   where: { id: Number(where) },
+      limit,
+      offset,
       orderBy: {
         id: orderBy,
       },

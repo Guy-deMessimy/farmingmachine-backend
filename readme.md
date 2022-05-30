@@ -169,5 +169,10 @@ NEW FARMING MACHINE
 - defines the interface for input or/and output within our system : nest g class user/dto/create-user.dto --no-spec
 - In order to check correct shape and/or missing require fields of request, add validation rules to our DTO and use validationPipe : npm i class-validator class-transformer
 - Simplify common transformation by adding :  npm i @nestjs/mapped-types
+- Avoid users passing invalid properties to our requests and stripped out and removed
+- Ensure payloads come in the expected shape
+- For type orm : configure app module with TypeOrmModule and rgbd / create an entity with table and column / use 
+module with typeOrmModule on service module / usentity with injectRepository on service / create relations / retrieve entities with their relations / using cascading inserts and updates
+- 
 
 

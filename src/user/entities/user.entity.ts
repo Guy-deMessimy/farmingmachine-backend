@@ -1,6 +1,9 @@
+import { Prisma } from '@prisma/client';
+
 export class User {
-  name: string;
-  email: string;
-  brand: string;
-  posts: string[];
+  limit?: number;
+  offset?: number;
+  cursor?: Prisma.UserWhereUniqueInput;
+  where?: Prisma.UserWhereInput;
+  orderBy?: Prisma.UserOrderByWithRelationInput;
 }
