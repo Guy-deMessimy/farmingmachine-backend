@@ -1,10 +1,6 @@
 import { Prisma } from '@prisma/client';
 import { IsOptional, IsPositive } from 'class-validator';
 
-interface UserInput {
-  id: number | Prisma.IntFilter;
-}
-
 export class PaginationQueryDto {
   @IsOptional()
   @IsPositive()

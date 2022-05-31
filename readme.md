@@ -173,6 +173,7 @@ NEW FARMING MACHINE
 - Ensure payloads come in the expected shape
 - For type orm : configure app module with TypeOrmModule and rgbd / create an entity with table and column / use 
 module with typeOrmModule on service module / usentity with injectRepository on service / create relations / retrieve entities with their relations / using cascading inserts and updates
-- 
+- Option : use custom provider (useValue, useClass, useFactory, async useFactory)
+- Control singleton or multithread providers scope or request-scoped providers
 
 

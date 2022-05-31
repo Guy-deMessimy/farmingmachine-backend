@@ -1,6 +1,6 @@
 import { Prisma } from '@prisma/client';
 
-export class User {
+export class UserInput {
   limit?: number;
   offset?: number;
   cursor?: Prisma.UserWhereUniqueInput;
