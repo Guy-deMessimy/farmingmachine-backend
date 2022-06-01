@@ -206,8 +206,16 @@ instantiated in the main file => fix it by create a module guard : nest g mo com
 - app.useGlobalGuards(new ApiKeyGuard()) on main.ts is only available if guards do not use dependancy injection
 - use @Public() to illustrate purpose
 
+- Interceptors : transform the result, transform exception, extend basic method behavior ...
+- create a new WrapResponseInterceptor will handle incoming request and "wrap" our data for us automatically
+- nest g interceptor common/interceptors/wrap-response
+- cf Observable (Rxjs) it easier to compose async promises or callback base code
+- implemant custom logic both before and after the exectution of the final route
+- test request / response lifecycle with insomnia
+
+
 - Pipes :
 
-- Interceptors :
+
 
 
