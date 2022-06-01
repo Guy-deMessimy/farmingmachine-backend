@@ -24,6 +24,8 @@ export class UserController {
   @Public()
   @Get()
   async getUsers(@Query() params): Promise<UserModel[]> {
+    // to illustrate timeout interceptors
+    // await new Promise((resolve) => setTimeout(resolve, 5000));
     return this.userService.users(params);
   }
 

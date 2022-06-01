@@ -207,11 +207,20 @@ instantiated in the main file => fix it by create a module guard : nest g mo com
 - use @Public() to illustrate purpose
 
 - Interceptors : transform the result, transform exception, extend basic method behavior ...
+
+1/ transform result
 - create a new WrapResponseInterceptor will handle incoming request and "wrap" our data for us automatically
 - nest g interceptor common/interceptors/wrap-response
 - cf Observable (Rxjs) it easier to compose async promises or callback base code
 - implemant custom logic both before and after the exectution of the final route
 - test request / response lifecycle with insomnia
+
+2/ extend logic
+- add a timeout if an endpoint doesn't return anything after a certain period (finish request and send back an error message)
+- nest g interceptor common/interceptors/timeout
+- implemant custom logic both with setTimeout
+- Add manual timeout on controller to force timeout interceptor to work
+
 
 
 - Pipes :
