@@ -1,6 +1,8 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { HttpExceptionFilter } from './common/filters/http-exception.filter';
+import { ApiKeyGuard } from './common/guards/api-key.guard';
 import { PrismaService } from './prisma/prisma.service';
 
 async function bootstrap() {
@@ -11,9 +13,9 @@ async function bootstrap() {
       whitelist: true,
       //  top a request if any non-white listed properties are present :
       forbidNonWhitelisted: true,
-      // transform a payload on an instance of his dto gloabally and transform type url (ex string on number if it is requested):
+      // transform payloads on an instance of their dto and transform type url (ex string on number if it is requested):
       transform: true,
-      // avoid use @type decorator on DTO :
+      // avoid use @type decorator on DTO --disable dto type :
       transformOptions: {
         enableImplicitConversion: true,
       },
@@ -22,6 +24,8 @@ async function bootstrap() {
 
   const prismaService = app.get(PrismaService);
   await prismaService.enableShutdownHooks(app);
+  app.useGlobalFilters(new HttpExceptionFilter());
+  app.useGlobalGuards(new ApiKeyGuard());
   await app.listen(3000);
 }
 bootstrap();

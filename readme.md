@@ -163,6 +163,7 @@ NEW FARMING MACHINE
 - Update your generated Prisma Client after every change to Prisma models : prisma generate
 - The prisma generate command reads your Prisma schema and updates the generated Prisma Client library inside node_modules/@prisma/client. 
 - for debugging nest js application please ref to https://javascript.plainenglish.io/debugging-nestjs-in-vscode-d474a088c63b
+
 - Abstract away the Prisma Client API for database queries within a service. To get started, you can create a new PrismaService that takes care of instantiating PrismaClient and connecting to your database : nest g service
 - generate a new controller : nest g controller
 - encompass business domain on modules: nest g module {name}
@@ -173,7 +174,24 @@ NEW FARMING MACHINE
 - Ensure payloads come in the expected shape
 - For type orm : configure app module with TypeOrmModule and rgbd / create an entity with table and column / use 
 module with typeOrmModule on service module / usentity with injectRepository on service / create relations / retrieve entities with their relations / using cascading inserts and updates
-- Option : use custom provider (useValue, useClass, useFactory, async useFactory)
-- Control singleton or multithread providers scope or request-scoped providers
+- Option provider : use custom provider (useValue, useClass, useFactory, async useFactory)
+- Option thread : control singleton or multithread providers scope or request-scoped providers
+
+- Binding blocks : control the flow, content, validation 
+- Binding blocks : can be globally scope - controller scope (use class or new instance if context need a specific configuration ) - method scope - and specific bonus for pipes : param scope --useful when validation logic concern only one parameter)
+- Keep in mind : not overriding - priority to top level
+
+- Exception filters : caught an exception when is not handled by application for send user friendly response
+- nest g filter common/filters/http-exception
+- complete exception.filter.ts logic and add app.useGlobalFilters(new HttpExceptionFilter()) on main.ts (comment or decomment for example on http://localhost:3000/users/user-id/-1)
+
+- Guards : guards have one responsability, check if the request meets certain conditions (permissions, roles, ACls : authentification and authorization), for example guards extract hand validate token
+- nest g guard common/guards/api-key
+- complete api-key.guard.ts logic and add app.useGlobalGuards(new ApiKeyGuard()) on main.ts (comment or decomment for example on http://localhost:3000/users/user-id/-1)
+
+ 
+- Pipes :
+
+- Interceptors :
 
 

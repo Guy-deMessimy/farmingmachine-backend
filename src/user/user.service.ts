@@ -13,6 +13,7 @@ export class UserService {
     const user = await this.prisma.user.findUnique({
       where: userWhereUniqueInput,
     });
+    // prefer use Exceptions Filters
     const { id, email } = userWhereUniqueInput;
     const userParams = `${
       id ? `User with id:${id} not found` : `User with email:${email} not found`
