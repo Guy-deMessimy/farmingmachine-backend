@@ -4,7 +4,6 @@ import {
   Param,
   Post,
   Body,
-  Put,
   Delete,
   Patch,
   Query,
@@ -14,16 +13,21 @@ import { User as UserModel } from '@prisma/client';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
+import { Public } from 'src/common/decorators/public.decorator';
 
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  // @SetMetadata('isPublic', true)
+  // prefer use custom decorator cf public.decorator.ts
+  @Public()
   @Get()
   async getUsers(@Query() params): Promise<UserModel[]> {
     return this.userService.users(params);
   }
 
+  @Public()
   @Get('filtered-user')
   async getFilterUsers(
     @Query() paginationQuery: PaginationQueryDto,
@@ -41,6 +45,7 @@ export class UserController {
     });
   }
 
+  @Public()
   @Get('filtered-user/:searchString')
   async getFilteredUsers(
     @Param('searchString') searchString: string,
@@ -52,8 +57,6 @@ export class UserController {
     });
   }
 
-  // Need to fix security path
-
   @Get('user-id/:id')
   async getUserById(@Param('id') id: number): Promise<UserModel> {
     return this.userService.user({ id: Number(id) });
@@ -64,6 +67,7 @@ export class UserController {
     return this.userService.user({ email: String(email) });
   }
 
+  @Public()
   @Post('user')
   async signupUser(@Body() userData: CreateUserDto): Promise<UserModel> {
     return this.userService.createUser(userData);

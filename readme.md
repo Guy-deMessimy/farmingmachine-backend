@@ -198,6 +198,14 @@ module with typeOrmModule on service module / usentity with injectRepository on 
  - update .env and test console.log(argument's service)
  - example : set api-guards with CongigService to get API_KEY
 
+- use setMetadata decorator to route handlers
+- create decorators file on common 
+- update logic on ApiKeyGuard : access routes metadata in our guard with Reflector (retrieved metadata within a specific context)
+- update main.ts for boostrapping application : because we are using @injection dependancy inside of our Guard wich was 
+instantiated in the main file => fix it by create a module guard : nest g mo common
+- app.useGlobalGuards(new ApiKeyGuard()) on main.ts is only available if guards do not use dependancy injection
+- use @Public() to illustrate purpose
+
 - Pipes :
 
 - Interceptors :

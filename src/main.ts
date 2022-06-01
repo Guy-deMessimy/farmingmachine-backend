@@ -25,7 +25,7 @@ async function bootstrap() {
   const prismaService = app.get(PrismaService);
   await prismaService.enableShutdownHooks(app);
   app.useGlobalFilters(new HttpExceptionFilter());
-  app.useGlobalGuards(new ApiKeyGuard());
+  // app.useGlobalGuards(new ApiKeyGuard());
   await app.listen(3000);
 }
 bootstrap();
