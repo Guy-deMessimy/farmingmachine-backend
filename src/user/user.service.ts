@@ -8,9 +8,14 @@ import { ConfigService } from '@nestjs/config';
 export class UserService {
   constructor(
     private prisma: PrismaService,
+    // illustrate configService
     private readonly configService: ConfigService,
   ) {
-    const databaseHost = this.configService.get<string>('DATABASE_HOST');
+    const databaseHost = this.configService.get<string>(
+      'DATABASE_HOST',
+      // use a default
+      'localhost',
+    );
     console.log(databaseHost);
   }
 

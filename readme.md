@@ -196,7 +196,7 @@ module with typeOrmModule on service module / usentity with injectRepository on 
  - import ConfigService on domain service
  - add CongigService on service contructor
  - update .env and test console.log(argument's service)
-
+ - example : set api-guards with CongigService to get API_KEY
 
 - Pipes :
 
