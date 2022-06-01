@@ -205,6 +205,7 @@ module with typeOrmModule on service module / usentity with injectRepository on 
 instantiated in the main file => fix it by create a module guard : nest g mo common
 - app.useGlobalGuards(new ApiKeyGuard()) on main.ts is only available if guards do not use dependancy injection
 - use @Public() to illustrate purpose
+- testing with roles
 
 - Interceptors : transform the result, transform exception, extend basic method behavior ...
 
@@ -230,6 +231,23 @@ instantiated in the main file => fix it by create a module guard : nest g mo com
 - Pipes also receive the arguments meant to be passed on to the method. Any transformation or validation operation takes place at this time - afterwards the route handler is invoked with any (potentially) transformed arguments.
 - implemant custom logic on pipe
 - test with insomnia : http://localhost:3000/users/user-id/abc (see console log)
+
+- Middleware : function called before the route handler and any binding blocks
+- specified route PATH.
+- executing code
+- making changes to the request and the response objects.
+- ending the request-response cycle.
+- Or even calling the next middleware function in the call stack.
+- When working with middleware, if the current middleware function does not END the request-response cycle, it must call the next() method, which passes control to the next middleware function.
+- Otherwise, the request will be left hanging - and never complete.
+- Middleware can be implemanted in function or a class
+- function is stateless, can't inject dependancies and access to the nest container
+- class can be both
+- nest g middleware common/middleware/logging
+- implemant custom logic on middleware
+- consume middleware on common module
+- test on insomnia
+- example : mesure of request API time
 
 
 
