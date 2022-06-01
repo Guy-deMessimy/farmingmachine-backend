@@ -2,10 +2,17 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { User, Prisma } from '@prisma/client';
 import { UserInput } from './entities/user.entity';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class UserService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private readonly configService: ConfigService,
+  ) {
+    const databaseHost = this.configService.get<string>('DATABASE_HOST');
+    console.log(databaseHost);
+  }
 
   async user(
     userWhereUniqueInput: Prisma.UserWhereUniqueInput,

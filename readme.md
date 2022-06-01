@@ -188,8 +188,16 @@ module with typeOrmModule on service module / usentity with injectRepository on 
 - Guards : guards have one responsability, check if the request meets certain conditions (permissions, roles, ACls : authentification and authorization), for example guards extract hand validate token
 - nest g guard common/guards/api-key
 - complete api-key.guard.ts logic and add app.useGlobalGuards(new ApiKeyGuard()) on main.ts (comment or decomment for example on http://localhost:3000/users/user-id/-1)
-
+- validate an API_KEY is present within each request only on private routes with add the key on Insomnia
  
+ - ConfigModule and ConfiService : 
+ - npm i @nestjs/config
+ - Import ConfigModule on domain module
+ - import ConfigService on domain service
+ - add CongigService on service contructor
+ - update .env and test console.log(argument's service)
+
+
 - Pipes :
 
 - Interceptors :
