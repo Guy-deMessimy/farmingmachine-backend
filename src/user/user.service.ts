@@ -16,7 +16,7 @@ export class UserService {
       // use a default
       'localhost',
     );
-    console.log(databaseHost);
+    console.log('Config Service :', databaseHost);
   }
 
   async user(

@@ -221,9 +221,15 @@ instantiated in the main file => fix it by create a module guard : nest g mo com
 - implemant custom logic both with setTimeout
 - Add manual timeout on controller to force timeout interceptor to work
 
-
-
-- Pipes :
+- Pipes : 
+- Transformation: where we transform input data to the desired output
+- validation: where we evaluate input data and if valid, simply pass it through unchanged. If the data is NOT valid - we want to throw an exception.
+- create a custom pipe that automatically parses any incoming string to an integer (alternatively we could use ParseIntPip)
+- transform method received 2 parameters : current input value is processing before it is received by the route handler method and metadata
+- other usecase : data fields were missing we can set defaults within pipes
+- Pipes also receive the arguments meant to be passed on to the method. Any transformation or validation operation takes place at this time - afterwards the route handler is invoked with any (potentially) transformed arguments.
+- implemant custom logic on pipe
+- test with insomnia : http://localhost:3000/users/user-id/abc (see console log)
 
 
 

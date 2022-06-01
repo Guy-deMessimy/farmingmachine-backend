@@ -14,6 +14,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { Public } from 'src/common/decorators/public.decorator';
+import { ParseIntPipe } from 'src/common/pipes/parse-int.pipe';
 
 @Controller('users')
 export class UserController {
@@ -59,8 +60,11 @@ export class UserController {
     });
   }
 
+  @Public()
   @Get('user-id/:id')
-  async getUserById(@Param('id') id: number): Promise<UserModel> {
+  async getUserById(@Param('id', ParseIntPipe) id: number): Promise<UserModel> {
+    // to illustrate parse-int pipes interceptor
+    console.log('Pipes : id', id);
     return this.userService.user({ id: Number(id) });
   }
 
