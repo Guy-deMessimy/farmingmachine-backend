@@ -261,4 +261,10 @@ instantiated in the main file => fix it by create a module guard : nest g mo com
     Contact information, license, terms of use and other information.
     and much more ...
 - npm install --save @nestjs/swagger swagger-ui-express
-
+- set main.ts file
+- npm run start:dev
+- http://localhost:3000/api
+- set nest-cli.json to feed swagger param and/or body routes
+- add @ApiProperty() to describe dto schema and populate swager UI
+- add @ApiResponse() to describe response (add an custome error code to UI swagger routes)
+- add tag to related sets and endpoint together to navigate on swagger UI
