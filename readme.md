@@ -249,6 +249,16 @@ instantiated in the main file => fix it by create a module guard : nest g mo com
 - test on insomnia
 - example : mesure of request API time
 
+- custom param decorators
+- create protocol.decorator files
+- add custom logic within decorator
+- use it on controller route method
 
-
+- describe rest API nest Js app with OpenApi :
+    Available operations (endpoints)
+    Operation parameters: Input and output for each operation
+    Authentication methods
+    Contact information, license, terms of use and other information.
+    and much more ...
+- npm install --save @nestjs/swagger swagger-ui-express
 

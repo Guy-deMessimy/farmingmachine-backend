@@ -15,6 +15,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { Public } from 'src/common/decorators/public.decorator';
 import { ParseIntPipe } from 'src/common/pipes/parse-int.pipe';
+import { Protocol } from 'src/common/decorators/protocol.decorator';
 
 @Controller('users')
 export class UserController {
@@ -24,7 +25,12 @@ export class UserController {
   // prefer use custom decorator cf public.decorator.ts
   @Public()
   @Get()
-  async getUsers(@Query() params): Promise<UserModel[]> {
+  async getUsers(
+    // to illustrate custom param decorator
+    @Protocol('https') protocol: string,
+    @Query() params,
+  ): Promise<UserModel[]> {
+    console.log('protocol', protocol);
     // to illustrate timeout interceptors
     // await new Promise((resolve) => setTimeout(resolve, 5000));
     return this.userService.users(params);
