@@ -31,7 +31,8 @@ async function bootstrap() {
   // app.useGlobalGuards(new ApiKeyGuard());
   app.useGlobalInterceptors(
     new WrapResponseInterceptor(),
-    new TimeoutInterceptor(),
+    // decomment to illustrate useGlobalFilters purpose
+    // new TimeoutInterceptor(),
   );
 
   // Setting up Swagger document

@@ -12,10 +12,10 @@ import { UserService } from './user.service';
 import { User as UserModel } from '@prisma/client';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
-import { Public } from 'src/common/decorators/public.decorator';
-import { ParseIntPipe } from 'src/common/pipes/parse-int.pipe';
-import { Protocol } from 'src/common/decorators/protocol.decorator';
+import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
+import { Public } from '../common/decorators/public.decorator';
+import { ParseIntPipe } from '../common/pipes/parse-int.pipe';
+import { Protocol } from '../common/decorators/protocol.decorator';
 import { ApiForbiddenResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('users')
@@ -23,6 +23,7 @@ import { ApiForbiddenResponse, ApiTags } from '@nestjs/swagger';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  // feed swagger
   @ApiForbiddenResponse({ description: 'Forbidden.' })
   // @SetMetadata('isPublic', true)
   // prefer use custom decorator cf public.decorator.ts
@@ -71,12 +72,14 @@ export class UserController {
 
   @Public()
   @Get('user-id/:id')
-  async getUserById(@Param('id', ParseIntPipe) id: number): Promise<UserModel> {
+  // ParseIntPipe illustrate custom param Pipes
+  async getUserById(@Param('id') id: number): Promise<UserModel> {
     // to illustrate parse-int pipes interceptor
-    console.log('Pipes : id', id);
+    // console.log('Pipes : id', id);
     return this.userService.user({ id: Number(id) });
   }
 
+  @Public()
   @Get('user-email/:email')
   async getUserByEmail(@Param('email') email: string): Promise<UserModel> {
     return this.userService.user({ email: String(email) });
