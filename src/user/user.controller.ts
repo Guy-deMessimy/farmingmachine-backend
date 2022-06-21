@@ -73,7 +73,8 @@ export class UserController {
   @Public()
   @Get('user-id/:id')
   // ParseIntPipe illustrate custom param Pipes
-  async getUserById(@Param('id') id: number): Promise<UserModel> {
+  async getUserById(@Param('id', ParseIntPipe) id: number): Promise<UserModel> {
+    // async getUserById(@Param('id') id: number):
     // to illustrate parse-int pipes interceptor
     // console.log('Pipes : id', id);
     return this.userService.user({ id: Number(id) });

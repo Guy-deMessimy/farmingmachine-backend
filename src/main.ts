@@ -19,15 +19,18 @@ async function bootstrap() {
       // transform payloads on an instance of their dto and transform type url (ex string on number if it is requested):
       transform: true,
       // avoid use @type decorator on DTO --disable dto type :
+      // be careful if true allow a number value on payload for a string value type dto
       transformOptions: {
-        enableImplicitConversion: true,
+        enableImplicitConversion: false,
       },
     }),
   );
 
   const prismaService = app.get(PrismaService);
   await prismaService.enableShutdownHooks(app);
+
   app.useGlobalFilters(new HttpExceptionFilter());
+  // disable globally method if class injection exist
   // app.useGlobalGuards(new ApiKeyGuard());
   app.useGlobalInterceptors(
     new WrapResponseInterceptor(),
