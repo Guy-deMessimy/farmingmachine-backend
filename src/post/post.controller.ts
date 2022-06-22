@@ -30,6 +30,7 @@ export class PostController {
     return this.postService.post({ id: Number(id) });
   }
 
+  @Public()
   @Delete('post/:id')
   async deletePost(@Param('id') id: string): Promise<PostModel> {
     return this.postService.deletePost({ id: Number(id) });

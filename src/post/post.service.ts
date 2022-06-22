@@ -13,29 +13,17 @@ export class PostService {
   ) {}
 
   async createPost(data: Prisma.PostCreateInput): Promise<Post> {
-    const email = data.author.connect.email;
-    const userid = await this.user.user({ email: String(email) });
-    if (userid) {
-      return this.prisma.post.create({
-        data,
-      });
-    }
+    return this.prisma.post.create({
+      data,
+    });
   }
 
   async post(
     postWhereUniqueInput: Prisma.PostWhereUniqueInput,
   ): Promise<Post | null> {
-    const post = await this.prisma.post.findUnique({
+    return this.prisma.post.findUnique({
       where: postWhereUniqueInput,
     });
-    const { id } = postWhereUniqueInput;
-    const userParams = `${
-      id ? `User with id:${id} not found` : `User with email:${id} not found`
-    }`;
-    if (!post) {
-      throw new NotFoundException(userParams);
-    }
-    return post;
   }
 
   async deletePost(where: Prisma.PostWhereUniqueInput): Promise<Post> {
