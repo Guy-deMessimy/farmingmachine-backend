@@ -28,7 +28,7 @@ export class UserController {
   // @SetMetadata('isPublic', true)
   // prefer use custom decorator cf public.decorator.ts
   @Public()
-  @Get()
+  @Get('all')
   async getUsers(
     // to illustrate custom param decorator
     @Protocol('https') protocol: string,
@@ -71,6 +71,12 @@ export class UserController {
   }
 
   @Public()
+  @Get('user-email/:email')
+  async getUserByEmail(@Param('email') email: string): Promise<UserModel> {
+    return this.userService.user({ email: String(email) });
+  }
+
+  @Public()
   @Get('user-id/:id')
   // ParseIntPipe illustrate custom param Pipes
   async getUserById(@Param('id', ParseIntPipe) id: number): Promise<UserModel> {
@@ -81,17 +87,12 @@ export class UserController {
   }
 
   @Public()
-  @Get('user-email/:email')
-  async getUserByEmail(@Param('email') email: string): Promise<UserModel> {
-    return this.userService.user({ email: String(email) });
-  }
-
-  @Public()
   @Post('user')
   async signupUser(@Body() userData: CreateUserDto): Promise<UserModel> {
     return this.userService.createUser(userData);
   }
 
+  @Public()
   @Patch('user/:id')
   async currentUser(
     @Param('id') id: string,
@@ -103,6 +104,7 @@ export class UserController {
     });
   }
 
+  @Public()
   @Delete('user-id/:id')
   async deleteUserById(@Param('id') id: number): Promise<UserModel> {
     return this.userService.deleteUser({ id: Number(id) });
