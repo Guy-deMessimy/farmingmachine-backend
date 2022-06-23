@@ -10,18 +10,21 @@ import { PrismaService } from './prisma/prisma.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  // Apply the ValidationPipe globally in our main.ts file :
+  // ensuring all endpoints are protected from receiving incorrect data
   app.useGlobalPipes(
     new ValidationPipe({
+      // have error message in case of incorrect request
+      disableErrorMessages: false,
+      // filter out properties that should not be received by the method handler and removed it
       whitelist: true,
-      //  top a request if any non-white listed properties are present :
-      forbidNonWhitelisted: true,
-      // transform payloads on an instance of their dto and transform type url (ex string on number if it is requested):
+      //  stop a request if any non-white listed properties are present
+      forbidNonWhitelisted: false,
+      // transform payloads on an instance of their dto
       transform: true,
-      // avoid use @type decorator on DTO --disable dto type :
-      // be careful if true allow a number value on payload for a string value type dto
+      // perform conversion of primitive types comes from the network (ex request id = string to number)
+      // if true @type on DTO can be disable
       transformOptions: {
-        enableImplicitConversion: false,
+        enableImplicitConversion: true,
       },
     }),
   );

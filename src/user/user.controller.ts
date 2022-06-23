@@ -86,7 +86,10 @@ export class UserController {
   @Public()
   @Post('user')
   async signupUser(@Body() userData: CreateUserDto): Promise<UserModel> {
-    return this.userService.createUser(userData);
+    // to illustrate useGlobalPipes transform option
+    if (userData instanceof CreateUserDto) {
+      return this.userService.createUser(userData);
+    }
   }
 
   @Public()
