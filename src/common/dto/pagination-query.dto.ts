@@ -4,18 +4,18 @@ import { IsOptional, IsPositive } from 'class-validator';
 export class PaginationQueryDto {
   @IsOptional()
   @IsPositive()
-  limit: number;
+  readonly limit: number;
 
   @IsOptional()
   @IsPositive()
-  offset: number;
+  readonly offset: number;
 
   @IsOptional()
-  orderBy: Prisma.SortOrder;
+  readonly orderBy: Prisma.SortOrder;
 
   @IsOptional()
-  cursor: Prisma.UserWhereUniqueInput;
+  readonly cursor: Prisma.UserWhereUniqueInput;
 
   @IsOptional()
-  where: number | Prisma.IntFilter;
+  readonly where: number | Prisma.IntFilter;
 }

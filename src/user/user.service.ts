@@ -37,7 +37,7 @@ export class UserService {
   }
 
   async users(paginationQuery: UserInput): Promise<User[]> {
-    const { limit, offset, cursor, where, orderBy } = paginationQuery;
+    const { limit, offset, cursor, orderBy, where } = paginationQuery;
     return this.prisma.user.findMany({
       skip: offset,
       take: limit,

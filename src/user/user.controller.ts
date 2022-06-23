@@ -45,15 +45,12 @@ export class UserController {
   async getFilterUsers(
     @Query() paginationQuery: PaginationQueryDto,
   ): Promise<UserModel[]> {
-    const { limit, offset, orderBy, where } = paginationQuery;
+    const { limit, offset, orderBy } = paginationQuery;
     return this.userService.users({
       limit,
       offset,
       orderBy: {
         id: orderBy,
-      },
-      where: {
-        id: Number(where),
       },
     });
   }

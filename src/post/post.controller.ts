@@ -31,15 +31,12 @@ export class PostController {
   async getFilterPosts(
     @Query() paginationQuery: PaginationQueryDto,
   ): Promise<PostModel[]> {
-    const { limit, offset, orderBy, where } = paginationQuery;
+    const { limit, offset, orderBy } = paginationQuery;
     return this.postService.posts({
       limit,
       offset,
       orderBy: {
         id: orderBy,
-      },
-      where: {
-        id: Number(where),
       },
     });
   }
