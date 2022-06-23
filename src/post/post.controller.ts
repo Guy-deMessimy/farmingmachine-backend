@@ -14,6 +14,7 @@ import { Public } from 'src/common/decorators/public.decorator';
 import { CreatePostDto } from './dto/create-post.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
+import { UpdatePostDto } from './dto/update-post.dto';
 
 @ApiTags('posts')
 @Controller('posts')
@@ -90,10 +91,13 @@ export class PostController {
 
   @Public()
   @Put('publish/:id')
-  async publishPost(@Param('id') id: string): Promise<PostModel> {
+  async publishPost(
+    @Param('id') id: string,
+    @Body() userData: UpdatePostDto,
+  ): Promise<PostModel> {
     return this.postService.updatePost({
       where: { id: Number(id) },
-      data: { published: true },
+      data: userData,
     });
   }
 
