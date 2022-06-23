@@ -1,32 +1,3 @@
-# Taskberry server 🫐
-
-## Installation
-
-Cloner le repo et lancer un `yarn` pour récupérer les dépendances. Se diriger ensuite vers le terminal et accéder à l'interface mysql
-
-```sh
-mysql -u root -p
-```
-
-puis créer la base pour que Prisma puisse y accéder
-
-```sql
-CREATE DATABASE IF NOT EXISTS taskberry;
-```
-
-quitter mysql avec `exit` et créer un fichier `.env` pour renseigner la variable pour la connexion a la db
-
-```dosini
-PRISMA_DATABASE_URL=mysql://root:password$@localhost:3306/taskberry
-```
-
-lancer ensuite la migration Prisma
-
-```sh
-npx prisma migrate dev --name init
-```
-
-lancer ensuite le serveur avec `yarn start` qui sera sur [localhost:4000](http://localhost:4000/)
 
 ![apollo server](https://i.ibb.co/jRgwD1M/image.png)
 
@@ -46,17 +17,6 @@ La documentation des tests unitaires pour Prisma + Jest est disponible sur [Pris
 
 ## Infos
 
-### Prisma studio
-
-Pour lancer Prisma studio
-
-```sh
-npx prisma studio
-```
-
-Une session sera lancée sur [localhost:5555](http://localhost:5555/)
-
-![prisma studio](https://i.ibb.co/X5cy56m/image.png)
 
 ### Commits & merge
 
