@@ -17,6 +17,7 @@ import { Public } from '../common/decorators/public.decorator';
 import { ParseIntPipe } from '../common/pipes/parse-int.pipe';
 import { Protocol } from '../common/decorators/protocol.decorator';
 import { ApiForbiddenResponse, ApiTags } from '@nestjs/swagger';
+import { PaginationQueryOmitDto } from 'src/common/dto/pagination-query-omit.dto';
 
 @ApiTags('users')
 @Controller('users')
@@ -41,16 +42,34 @@ export class UserController {
   }
 
   @Public()
-  @Get('filtered-user')
-  async getFilterUsers(
-    @Query() paginationQuery: PaginationQueryDto,
+  @Get('query-filtered-user')
+  async getFilterUsersByQUery(
+    @Query() paginationQueryOmitDto: PaginationQueryOmitDto,
   ): Promise<UserModel[]> {
-    const { limit, offset, orderBy } = paginationQuery;
+    const { limit, offset, orderBy } = paginationQueryOmitDto;
     return this.userService.users({
       limit,
       offset,
       orderBy: {
         id: orderBy,
+      },
+    });
+  }
+
+  @Public()
+  @Get('filtered-user')
+  async getFilterUsers(
+    @Query() paginationQuery: PaginationQueryDto,
+  ): Promise<UserModel[]> {
+    const { limit, offset, orderBy, where } = paginationQuery;
+    return this.userService.users({
+      limit,
+      offset,
+      orderBy: {
+        id: orderBy,
+      },
+      where: {
+        id: Number(where),
       },
     });
   }
