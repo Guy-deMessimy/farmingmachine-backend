@@ -30,10 +30,16 @@ async function bootstrap() {
     }),
   );
 
+  // initialize prisma service
   const prismaService = app.get(PrismaService);
   await prismaService.enableShutdownHooks(app);
 
+  // Global-scoped filters are used across the whole application, for every controller and every route handler
+  // In terms of dependency injection, global filters registered from outside of any module
+  // Gloabl filter cannot inject dependancies,
+  // In order to solve this issue, you can register a global scoped filter directly from any module
   app.useGlobalFilters(new HttpExceptionFilter());
+
   // disable globally method if class injection exist
   // app.useGlobalGuards(new ApiKeyGuard());
   app.useGlobalInterceptors(
