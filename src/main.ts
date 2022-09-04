@@ -36,7 +36,7 @@ async function bootstrap() {
 
   // Global-scoped filters are used across the whole application, for every controller and every route handler
   // In terms of dependency injection, global filters registered from outside of any module
-  // Gloabl filter cannot inject dependancies,
+  // Global filter cannot inject dependancies,
   // In order to solve this issue, you can register a global scoped filter directly from any module
   app.useGlobalFilters(new HttpExceptionFilter());
 

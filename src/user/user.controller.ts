@@ -17,7 +17,7 @@ import { Public } from '../common/decorators/public.decorator';
 import { ParseIntPipe } from '../common/pipes/parse-int.pipe';
 import { Protocol } from '../common/decorators/protocol.decorator';
 import { ApiForbiddenResponse, ApiTags } from '@nestjs/swagger';
-import { PaginationQueryOmitDto } from 'src/common/dto/pagination-query-omit.dto';
+import { PaginationQueryOmitDto } from '../common/dto/pagination-query-omit.dto';
 
 @ApiTags('users')
 @Controller('users')
